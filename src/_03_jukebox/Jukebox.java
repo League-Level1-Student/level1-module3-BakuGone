@@ -5,6 +5,8 @@ package _03_jukebox;
  */
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -12,7 +14,10 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -20,15 +25,13 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /*   If you don't have javazoom.jar in your project, you can download it from here: http://bit.ly/javazoom
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
+public class Jukebox implements Runnable, ActionListener {
 
     public void run() {
 
 		// 1. Find an mp3 on your computer or on the Internet.
 		// 2. Create a Song object for that mp3
-
 		// 3. Play the Song
-
 		/*
 		 * 4. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
@@ -36,6 +39,25 @@ public class Jukebox implements Runnable {
 		 * cover is clicked, stop the currently playing song, and play the one
 		 * that was selected.
 		 */
+    	JFrame frame = new JFrame();
+    	JButton songOne = new JButton();
+    	JButton songTwo = new JButton();
+    	JPanel  panel = new JPanel();
+    	
+    	songOne.addActionListener(this);
+    	songOne.setText("Clarity");
+    	
+    	songTwo.addActionListener(this);
+    	songTwo.setText("Devil Town");
+    	
+    	frame.setVisible(true);
+    	panel.setVisible(true);
+    	songOne.setVisible(true);
+    	songTwo.setVisible(true);
+    	
+    	frame.add(panel);
+    	panel.add(songOne);
+    	panel.add(songTwo);
     }
     
     
@@ -45,6 +67,15 @@ public class Jukebox implements Runnable {
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
 	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+    	Song testSong = new Song("/Users/hiimdoge/Downloads/Clarity meme.mp3");
+    	testSong.play();
+		
+	}
+	
 
 }
 
